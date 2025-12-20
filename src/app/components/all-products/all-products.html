@@ -1,33 +1,70 @@
-<h2 class="ui header">All Products</h2>
+<h2 class="ui huge center aligned header">
+  <i class="shopping bag icon"></i>
+  All Products
+</h2>
 
-<div class="ui three stackable cards" *ngIf="products$ | async as products">
-  <div class="ui card" *ngFor="let p of products">
-    <div class="image">
-      <img [src]="p.image" alt="product image">
-    </div>
+<div class="ui container" *ngIf="products$ | async as products">
+  <div class="ui four stackable doubling link cards">
 
-    <div class="content">
-      <div class="header">{{ p.title }}</div>
-      <div class="meta">{{ p.category }}</div>
-      <div class="description">
-        <strong>{{ p.price }} $</strong>
+    <div class="ui raised card" *ngFor="let p of products">
+      <div class="blurring dimmable image">
+        <div class="ui dimmer">
+          <div class="content">
+            <div class="center">
+              <button
+                class="ui inverted primary button"
+                [routerLink]="['/product', p.id]"
+              >
+                <i class="eye icon"></i>
+                View
+              </button>
+            </div>
+          </div>
+        </div>
+        <img [src]="p.image" />
       </div>
-    </div>
 
-    <div class="extra content">
-      <button
-        class="ui primary button"
-        [routerLink]="['/product', p.id]"
-      >
-        Details
-      </button>
+      <!-- CONTENT -->
+      <div class="content">
+        <div class="header" style="min-height: 48px">
+          {{ p.title }}
+        </div>
 
-      <button
-        class="ui red button"
-        (click)="delete(p.id)"
-      >
-        Delete
-      </button>
+        <div class="meta">
+          <span class="ui tiny label">
+            <i class="tag icon"></i>
+            {{ p.category }}
+          </span>
+        </div>
+
+        <div class="description">
+          <h3 class="ui green header">
+            {{ p.price }} $
+          </h3>
+        </div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="extra content">
+        <div class="ui two buttons">
+          <button
+            class="ui basic blue button"
+            [routerLink]="['/product', p.id]"
+          >
+            <i class="info circle icon"></i>
+            Details
+          </button>
+
+          <button
+            class="ui basic red button"
+            (click)="delete(p.id)"
+          >
+            <i class="trash icon"></i>
+            Delete
+          </button>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

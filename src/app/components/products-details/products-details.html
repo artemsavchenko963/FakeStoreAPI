@@ -1,6 +1,6 @@
-<h2 class="ui header">Product Details</h2>
+<h2 class="page-title">Product Details</h2>
 
-<div class="ui form">
+<div class="product-form">
   <div class="field">
     <label>Title</label>
     <input type="text" [(ngModel)]="product.title">
@@ -21,11 +21,8 @@
     <textarea [(ngModel)]="product.description"></textarea>
   </div>
 
-  <button class="ui positive button" (click)="update()">
-    Update
-  </button>
-
-  <button class="ui button" (click)="back()">
-    Back
-  </button>
+  <div class="actions">
+    <button class="btn btn-primary" (click)="update()">Update</button>
+    <button class="btn btn-secondary" (click)="back()">Back</button>
+  </div>
 </div>
