@@ -1,0 +1,16 @@
+<h2>All Products</h2>
+
+<div *ngIf="products$ | async as products">
+  <div
+    *ngFor="let p of products"
+    style="border:1px solid #ccc; padding:10px; margin:10px"
+  >
+    <img [src]="p.image" width="100">
+    <h3>{{ p.title }}</h3>
+    <p>{{ p.price }} $</p>
+    <p>{{ p.category }}</p>
+
+    <button [routerLink]="['/product', p.id]">Details</button>
+    <button (click)="delete(p.id)">Delete</button>
+  </div>
+</div>

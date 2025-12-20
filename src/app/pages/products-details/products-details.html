@@ -1,0 +1,18 @@
+<h2>Product Details</h2>
+
+<label>Title</label>
+<input [(ngModel)]="product.title">
+
+<label>Price</label>
+<input type="number" [(ngModel)]="product.price">
+
+<label>Category</label>
+<input [(ngModel)]="product.category">
+
+<label>Description</label>
+<textarea [(ngModel)]="product.description"></textarea>
+
+<br><br>
+
+<button (click)="update()">Update</button>
+<button (click)="back()">Back</button>

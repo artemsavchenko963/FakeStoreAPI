@@ -1,14 +1,1 @@
-<hr>
-@if (users$ | async; as users) {
-<ul>
-    @for (user of users; track $index) {
-        <li>Id: {{user.id}}</li>
-        <ul><li>Title: {{user.title}}</li></ul>
-        <ul><li>Price: {{user.price}}$</li></ul>
-        <ul><li>Category: {{user.category}}</li></ul>
-        <ul>Rating: {{user.rating.rate}}</ul>
-        <br><br>
-    }
-</ul>
-}
-<hr>
+<router-outlet></router-outlet>

@@ -1,21 +1,12 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Data } from './services/data';
-import { Observable } from 'rxjs';
-import { AsyncPipe, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AsyncPipe, JsonPipe],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
-  
-  providers: [Data],
+  standalone: true
 })
 export class App {
-  users$: Observable<any>;
-
- constructor(private dataService: Data) {
-  this.users$ = this.dataService.getUsers();
- }
 }
