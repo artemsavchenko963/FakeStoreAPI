@@ -1,16 +1,33 @@
-<h2>All Products</h2>
+<h2 class="ui header">All Products</h2>
 
-<div *ngIf="products$ | async as products">
-  <div
-    *ngFor="let p of products"
-    style="border:1px solid #ccc; padding:10px; margin:10px"
-  >
-    <img [src]="p.image" width="100">
-    <h3>{{ p.title }}</h3>
-    <p>{{ p.price }} $</p>
-    <p>{{ p.category }}</p>
+<div class="ui three stackable cards" *ngIf="products$ | async as products">
+  <div class="ui card" *ngFor="let p of products">
+    <div class="image">
+      <img [src]="p.image" alt="product image">
+    </div>
 
-    <button [routerLink]="['/product', p.id]">Details</button>
-    <button (click)="delete(p.id)">Delete</button>
+    <div class="content">
+      <div class="header">{{ p.title }}</div>
+      <div class="meta">{{ p.category }}</div>
+      <div class="description">
+        <strong>{{ p.price }} $</strong>
+      </div>
+    </div>
+
+    <div class="extra content">
+      <button
+        class="ui primary button"
+        [routerLink]="['/product', p.id]"
+      >
+        Details
+      </button>
+
+      <button
+        class="ui red button"
+        (click)="delete(p.id)"
+      >
+        Delete
+      </button>
+    </div>
   </div>
 </div>

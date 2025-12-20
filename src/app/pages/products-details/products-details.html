@@ -1,18 +1,31 @@
-<h2>Product Details</h2>
+<h2 class="ui header">Product Details</h2>
 
-<label>Title</label>
-<input [(ngModel)]="product.title">
+<div class="ui form">
+  <div class="field">
+    <label>Title</label>
+    <input type="text" [(ngModel)]="product.title">
+  </div>
 
-<label>Price</label>
-<input type="number" [(ngModel)]="product.price">
+  <div class="field">
+    <label>Price</label>
+    <input type="number" [(ngModel)]="product.price">
+  </div>
 
-<label>Category</label>
-<input [(ngModel)]="product.category">
+  <div class="field">
+    <label>Category</label>
+    <input type="text" [(ngModel)]="product.category">
+  </div>
 
-<label>Description</label>
-<textarea [(ngModel)]="product.description"></textarea>
+  <div class="field">
+    <label>Description</label>
+    <textarea [(ngModel)]="product.description"></textarea>
+  </div>
 
-<br><br>
+  <button class="ui positive button" (click)="update()">
+    Update
+  </button>
 
-<button (click)="update()">Update</button>
-<button (click)="back()">Back</button>
+  <button class="ui button" (click)="back()">
+    Back
+  </button>
+</div>
