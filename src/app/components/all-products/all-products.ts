@@ -12,11 +12,23 @@ import { Data } from '../../services/data';
 export class AllProducts implements OnInit {
   products$!: Observable<any[]>;
 
+  isModalOpen = false;
+  selectedProducts: any =null;
+
   constructor(private dataService: Data) {}
 
   ngOnInit() {
     this.dataService.loadProducts();
     this.products$ = this.dataService.products$;
+  }
+
+  openModal(product: any) {
+    this.isModalOpen = true;
+    this.selectedProducts = product;
+  }
+  closeModal() {
+    this.isModalOpen = false;
+    this.selectedProducts = null;
   }
 
   delete(id: number) {

@@ -13,7 +13,7 @@
             <div class="center">
               <button
                 class="ui inverted primary button"
-                [routerLink]="['/product', p.id]"
+                (click)="openModal(p)"
               >
                 <i class="eye icon"></i>
                 View
@@ -21,7 +21,7 @@
             </div>
           </div>
         </div>
-        <img [src]="p.image" />
+        <img [src]="p.image" (click)="openModal(p)" />
       </div>
 
       <!-- CONTENT -->
@@ -66,5 +66,34 @@
       </div>
 
     </div>
+  </div>
+</div>
+
+<div
+  class="modal-backdrop"
+  *ngIf="isModalOpen"
+  (click)="closeModal()"
+></div>
+
+<div class="modal-window" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <i class="close icon close-btn" (click)="closeModal()"></i>
+
+    <h2>{{ selectedProducts.title }}</h2>
+
+    <img
+      [src]="selectedProducts.image"
+      class="modal-image"
+    />
+
+    <p><b>Category:</b> {{ selectedProducts.category }}</p>
+
+    <p class="description">
+      {{ selectedProducts.description }}
+    </p>
+
+    <h3 class="price">
+      {{ selectedProducts.price }} $
+    </h3>
   </div>
 </div>
