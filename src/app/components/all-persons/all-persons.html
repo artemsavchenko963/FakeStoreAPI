@@ -1,0 +1,94 @@
+<h2 class="ui huge center aligned header">
+  <i class="users icon"></i>
+  All Persons
+</h2>
+
+<div class="ui container" *ngIf="persons$ | async as persons">
+  <div class="ui four stackable doubling link cards">
+
+    <div class="ui raised card" *ngFor="let p of persons">
+      <div class="blurring dimmable image">
+        <div class="ui dimmer">
+          <div class="content">
+            <div class="center">
+              <button
+                class="ui inverted primary button"
+                (click)="openModal(p)"
+              >
+                <i class="eye icon"></i>
+                View
+              </button>
+            </div>
+          </div>
+        </div>
+        <img [src]="'https://i.pravatar.cc/300?u=' + p.id" (click)="openModal(p)" />
+      </div>
+
+      <!-- CONTENT -->
+      <div class="content">
+        <div class="header" style="min-height: 48px">
+          {{ p.firstname }} {{ p.lastname }}
+        </div>
+
+        <div class="meta">
+          <span class="ui tiny label">
+            <i class="envelope icon"></i>
+            {{ p.email }}
+          </span>
+        </div>
+
+        <div class="description">
+          <h3 class="ui green header">
+            {{ p.phone }}
+          </h3>
+        </div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="extra content">
+        <div class="ui two buttons">
+          <button
+            class="ui basic blue button"
+            [routerLink]="['/person', p.id]"
+          >
+            <i class="info circle icon"></i>
+            Details
+          </button>
+
+          <button
+            class="ui basic red button"
+            (click)="delete(p.id)"
+          >
+            <i class="trash icon"></i>
+            Delete
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal-backdrop"
+  *ngIf="isModalOpen"
+  (click)="closeModal()"
+></div>
+
+<div class="modal-window" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <i class="close icon close-btn" (click)="closeModal()"></i>
+
+    <h2>{{ selectedPersons.firstname }} {{ selectedPersons.lastname }}</h2>
+
+    <img
+      [src]="'https://i.pravatar.cc/300?u=' + selectedPersons.id"
+      class="modal-image"
+    />
+
+    <p><b>Email:</b> {{ selectedPersons.email }}</p>
+    <p><b>Phone:</b> {{ selectedPersons.phone }}</p>
+    <p><b>Website:</b> {{ selectedPersons.website }}</p>
+
+  </div>
+</div>

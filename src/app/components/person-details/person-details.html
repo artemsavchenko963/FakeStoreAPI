@@ -1,0 +1,23 @@
+<div *ngIf="person$ | async as person">
+  <h2 class="ui huge center aligned header">
+    <img [src]="'https://i.pravatar.cc/150?u=' + person.id" class="ui circular image">
+    {{ person.firstname }} {{ person.lastname }}
+  </h2>
+
+  <div class="ui container">
+    <div class="ui segment">
+      <p><strong>Email:</strong> {{ person.email }}</p>
+      <p><strong>Phone:</strong> {{ person.phone }}</p>
+      <p><strong>Website:</strong> {{ person.website }}</p>
+      <p><strong>Birthday:</strong> {{ person.birthday }}</p>
+      <p><strong>Gender:</strong> {{ person.gender }}</p>
+      <div *ngIf="person.address">
+        <p><strong>Address:</strong></p>
+        <p>{{ person.address.street }}, {{ person.address.streetName }}</p>
+        <p>{{ person.address.buildingNumber }}, {{ person.address.city }}</p>
+        <p>{{ person.address.zipcode }}, {{ person.address.country }}</p>
+        <p>Lat: {{ person.address.latitude }}, Lon: {{ person.address.longitude }}</p>
+      </div>
+    </div>
+  </div>
+</div>
