@@ -1,5 +1,5 @@
 <div class="login-container">
-  <h2>Login</h2>
+  <h2>{{ data.currentUser ? 'Edit Profile' : 'Login' }}</h2>
   <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
     <div class="form-group">
       <label for="name">Name:</label><br>
@@ -16,6 +16,11 @@
       <input type="text" id="login" name="login" [(ngModel)]="loginData.login" required>
     </div>
 
-    <button type="submit" [disabled]="!loginForm.form.valid">Submit</button>
+    <button type="submit" [disabled]="!loginForm.form.valid">
+      {{ data.currentUser ? 'Save Changes' : 'Submit' }}
+    </button>
+    <button type="button" *ngIf="data.currentUser" (click)="deleteUser()" style="background-color: red; color: white; margin-left: 10px;">
+      Delete Account
+    </button>
   </form>
 </div>

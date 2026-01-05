@@ -3,6 +3,15 @@
     <a routerLink="/login" class="item" routerLinkActive="active">Login</a>
     <a routerLink="/" class="item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Products</a>
     <a routerLink="/persons" class="item" routerLinkActive="active">Persons</a>
+    <div class="right menu" *ngIf="data.currentUser">
+      <div class="item">
+        Logged in as: {{ data.currentUser.name }}
+      </div>
+      <div class="item">
+        <button class="ui tiny button" routerLink="/login">Edit</button>
+        <button class="ui tiny red button" (click)="deleteUser()">Delete</button>
+      </div>
+    </div>
   </div>
   <div class="ui segment">
     <router-outlet></router-outlet>

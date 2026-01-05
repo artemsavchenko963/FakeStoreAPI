@@ -4,6 +4,7 @@ import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class Data {
+  currentUser: any = null;
   private api = 'https://fakestoreapi.com/products';
   private personsApi = 'https://fakerapi.it/api/v1/persons';
 
