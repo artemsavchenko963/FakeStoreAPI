@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { Data } from './services/data';
 import { CommonModule } from '@angular/common';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +12,10 @@ import { CommonModule } from '@angular/common';
   standalone: true,
 })
 export class App {
-  constructor(public data: Data) {}
+  constructor(public data: Data, private authService: AuthService) {}
 
-  deleteUser() {
-    if (confirm('Are you sure?')) {
-      this.data.currentUser = null;
-    }
+  logout() {
+    this.authService.logout();
+    this.data.currentUser = null;
   }
 }

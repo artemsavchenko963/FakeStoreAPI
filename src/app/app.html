@@ -1,19 +1,31 @@
-<div class="ui container">
-  <div class="ui secondary pointing menu">
-    <a routerLink="/login" class="item" routerLinkActive="active">Login</a>
-    <a routerLink="/" class="item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Products</a>
-    <a routerLink="/persons" class="item" routerLinkActive="active">Persons</a>
-    <div class="right menu" *ngIf="data.currentUser">
-      <div class="item">
-        Logged in as: {{ data.currentUser.name }}
-      </div>
-      <div class="item">
-        <button class="ui tiny button" routerLink="/login">Edit</button>
-        <button class="ui tiny red button" (click)="deleteUser()">Delete</button>
-      </div>
-    </div>
-  </div>
-  <div class="ui segment">
-    <router-outlet></router-outlet>
-  </div>
+<nav class="navbar">
+  <a routerLink="/">Products</a>
+  <a routerLink="/persons">Persons</a>
+  <a routerLink="/login" *ngIf="!data.currentUser">Login</a>
+  <a routerLink="/register" *ngIf="!data.currentUser">Register</a>
+  <span *ngIf="data.currentUser">Logged in as: {{ data.currentUser.name }}</span>
+  <a href="#" (click)="logout()" *ngIf="data.currentUser">Logout</a>
+</nav>
+
+<div class="content">
+  <router-outlet></router-outlet>
 </div>
+
+<style>
+  .navbar {
+    background-color: #333;
+    padding: 15px;
+    color: white;
+  }
+  .navbar a {
+    color: white;
+    margin-right: 15px;
+    text-decoration: none;
+  }
+  .navbar a:hover {
+    text-decoration: underline;
+  }
+  .content {
+    padding: 20px;
+  }
+</style>

@@ -1,41 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { Data } from '../../services/data';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './login.html',
-  styleUrl: './login.scss'
 })
-export class LoginComponent implements OnInit {
-  loginData = {
-    name: '',
-    email: '',
-    login: ''
-  };
+export class LoginComponent {
+  loginData = { username: '', password: '' };
+  errorMessage = '';
 
-  constructor(public data: Data) {}
-
-  ngOnInit() {
-    if (this.data.currentUser) {
-      this.loginData = { ...this.data.currentUser };
-    }
-  }
+  constructor(
+    public data: Data,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   onSubmit() {
-    const isUpdating = !!this.data.currentUser;
-    this.data.currentUser = { ...this.loginData };
-    alert(isUpdating ? 'Updated successfully!' : 'Logged in successfully!');
-  }
-
-  deleteUser() {
-    if (confirm('Are you sure?')) {
-      this.data.currentUser = null;
-      this.loginData = { name: '', email: '', login: '' };
-      alert('User deleted');
-    }
+    this.authService.login(this.loginData).subscribe({
+      next: (res: any) => {
+        this.authService.setSession(res.token, res.username);
+        this.data.currentUser = { name: res.username };
+        alert('Welcome back!');
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        this.errorMessage = err.error.message || 'Login failed';
+      }
+    });
   }
 }
